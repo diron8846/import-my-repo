@@ -177,4 +177,96 @@ All colors MUST be HSL.
   .hover-scale:hover {
     transform: scale(1.05);
   }
+
+  /* 3D Navigation Effects */
+  .nav-link-3d {
+    position: relative;
+    transform-style: preserve-3d;
+  }
+
+  .nav-icon-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, hsl(var(--primary) / 0.1), hsl(var(--primary) / 0.05));
+    border: 1px solid hsl(var(--primary) / 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+      0 4px 15px hsl(var(--primary) / 0.1),
+      inset 0 1px 0 hsl(var(--background) / 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-icon {
+    color: hsl(var(--primary));
+    filter: drop-shadow(0 0 4px hsl(var(--primary) / 0.3));
+    transition: all 0.3s ease;
+  }
+
+  .nav-link-3d:hover .nav-icon-container {
+    background: linear-gradient(145deg, hsl(var(--primary) / 0.2), hsl(var(--primary) / 0.1));
+    border-color: hsl(var(--primary) / 0.4);
+    box-shadow: 
+      0 8px 25px hsl(var(--primary) / 0.2),
+      0 0 20px hsl(var(--primary) / 0.3),
+      inset 0 1px 0 hsl(var(--background) / 0.3);
+    transform: translateY(-2px) scale(1.05);
+  }
+
+  .nav-link-3d:hover .nav-icon {
+    filter: drop-shadow(0 0 8px hsl(var(--primary) / 0.6));
+    transform: scale(1.1);
+  }
+
+  /* Dark mode adjustments */
+  .dark .nav-icon-container {
+    background: linear-gradient(145deg, hsl(var(--primary) / 0.15), hsl(var(--primary) / 0.08));
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: 
+      0 4px 15px hsl(var(--primary) / 0.15),
+      inset 0 1px 0 hsl(var(--foreground) / 0.1);
+  }
+
+  .dark .nav-link-3d:hover .nav-icon-container {
+    background: linear-gradient(145deg, hsl(var(--primary) / 0.25), hsl(var(--primary) / 0.15));
+    border-color: hsl(var(--primary) / 0.5);
+    box-shadow: 
+      0 8px 25px hsl(var(--primary) / 0.25),
+      0 0 25px hsl(var(--primary) / 0.4),
+      inset 0 1px 0 hsl(var(--foreground) / 0.15);
+  }
+
+  /* Mobile navigation icons */
+  .nav-icon-container-mobile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(145deg, hsl(var(--primary) / 0.1), hsl(var(--primary) / 0.05));
+    border: 1px solid hsl(var(--primary) / 0.2);
+    transition: all 0.2s ease;
+  }
+
+  .nav-icon-mobile {
+    color: hsl(var(--primary));
+    filter: drop-shadow(0 0 3px hsl(var(--primary) / 0.3));
+    transition: all 0.2s ease;
+  }
+
+  .nav-link-mobile:hover .nav-icon-container-mobile {
+    background: linear-gradient(145deg, hsl(var(--primary) / 0.2), hsl(var(--primary) / 0.1));
+    border-color: hsl(var(--primary) / 0.4);
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.3);
+  }
+
+  .nav-link-mobile:hover .nav-icon-mobile {
+    filter: drop-shadow(0 0 6px hsl(var(--primary) / 0.6));
+  }
 }
