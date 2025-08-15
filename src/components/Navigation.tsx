@@ -19,11 +19,6 @@ export function Navigation() {
     <nav className="fixed top-0 w-full z-50 glass-card shadow-lg">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <a href="#home" className="flex-shrink-0">
-            <Logo />
-          </a>
-
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => {
@@ -45,8 +40,13 @@ export function Navigation() {
             })}
           </div>
 
-          {/* Theme Toggle & Mobile Menu */}
-          <div className="flex items-center gap-2">
+          {/* Logo & Theme Toggle & Mobile Menu */}
+          <div className="flex items-center gap-4">
+            {/* Logo */}
+            <a href="#home" className="flex-shrink-0">
+              <Logo />
+            </a>
+            
             <ThemeToggle />
             
             {/* Mobile Menu Button */}
