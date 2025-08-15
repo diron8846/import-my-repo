@@ -8,33 +8,18 @@ export default function Teachers() {
   const teachers = [
     {
       id: 1,
-      name: "Pastor John Smith",
-      photo: "/placeholder.svg",
+      name: "Pst Jose Mathew",
+      photo: "/lovable-uploads/7e02486c-a73a-4c5d-932a-6ec83053268d.png",
     },
     {
       id: 2,
-      name: "Dr. Sarah Johnson",
-      photo: "/placeholder.svg",
+      name: "Ev Stanley George",
+      photo: "/lovable-uploads/d1073eae-d807-4a10-b0dc-333043892a67.png",
     },
     {
       id: 3,
-      name: "Rev. Michael Brown",
-      photo: "/placeholder.svg",
-    },
-    {
-      id: 4,
-      name: "Sister Mary Grace",
-      photo: "/placeholder.svg",
-    },
-    {
-      id: 5,
-      name: "Elder David Wilson",
-      photo: "/placeholder.svg",
-    },
-    {
-      id: 6,
-      name: "Dr. Rebecca Adams",
-      photo: "/placeholder.svg",
+      name: "Ev Ronal Maina",
+      photo: "/lovable-uploads/c54793fc-c1c4-4b30-8dfa-c66334ee4c74.png",
     },
   ]
 
