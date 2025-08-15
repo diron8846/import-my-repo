@@ -8,8 +8,8 @@ export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navLinks = [
-    { href: "#home", label: "Home" },
-    { href: "#teachers", label: "Teachers" },
+    { href: "/", label: "Home" },
+    { href: "/teachers", label: "Teachers" },
     { href: "#about", label: "About & Mission" },
     { href: "#resources", label: "Resources" },
     { href: "#contact", label: "Contact" },
