@@ -10,7 +10,7 @@ export function Navigation() {
   const navLinks = [
     { href: "/", label: "Home", icon: Home },
     { href: "/teachers", label: "Teachers", icon: GraduationCap },
-    { href: "#about", label: "About & Mission", icon: Heart },
+    { href: "/about", label: "About & Mission", icon: Heart },
     { href: "#resources", label: "Resources", icon: BookOpen },
     { href: "#contact", label: "Contact", icon: Mail },
   ]
