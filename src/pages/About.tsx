@@ -2,11 +2,24 @@ import { Navigation } from "@/components/Navigation"
 import { Footer } from "@/components/Footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Eye, Target, Heart, Users, Globe, Book, Award, Zap } from "lucide-react"
+import bibleBackground from "@/assets/bible-background.jpg"
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Navigation />
+    <div 
+      className="min-h-screen bg-background relative"
+      style={{
+        backgroundImage: `url(${bibleBackground})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      {/* Background overlay */}
+      <div className="absolute inset-0 bg-background/85 dark:bg-background/90" />
+      
+      <div className="relative z-10">
+        <Navigation />
       <main className="pt-16">
         {/* Hero Section */}
         <section className="py-16 px-4 bg-gradient-to-br from-primary/10 via-background to-accent/10">
@@ -212,8 +225,9 @@ const About = () => {
             </Card>
           </div>
         </section>
-      </main>
-      <Footer />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 };

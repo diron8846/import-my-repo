@@ -11,8 +11,8 @@ export function Navigation() {
     { href: "/", label: "Home", icon: Home },
     { href: "/teachers", label: "Teachers", icon: GraduationCap },
     { href: "/about", label: "About & Mission", icon: Heart },
-    { href: "#resources", label: "Resources", icon: BookOpen },
-    { href: "#contact", label: "Contact", icon: Mail },
+    { href: "/resources", label: "Resources", icon: BookOpen },
+    { href: "/contact", label: "Contact", icon: Mail },
   ]
 
   return (
@@ -40,14 +40,16 @@ export function Navigation() {
             })}
           </div>
 
-          {/* Logo & Theme Toggle & Mobile Menu */}
+          {/* Theme Toggle & Mobile Menu */}
           <div className="flex items-center gap-4">
-            {/* Logo */}
-            <a href="#home" className="flex-shrink-0">
-              <Logo />
-            </a>
-            
             <ThemeToggle />
+            
+            {/* User Logo */}
+            <img 
+              src="/lovable-uploads/fea897ea-762e-4aeb-9d5b-28e6ebd12ef9.png" 
+              alt="Hope for Life Jesus Ministry Logo" 
+              className="h-10 w-auto md:h-12 object-contain"
+            />
             
             {/* Mobile Menu Button */}
             <Button
