@@ -46,9 +46,9 @@ export function Navigation() {
             
             {/* User Logo */}
             <img 
-              src="/lovable-uploads/fea897ea-762e-4aeb-9d5b-28e6ebd12ef9.png" 
-              alt="Hope for Life Jesus Ministry Logo" 
-              className="h-10 w-auto md:h-12 object-contain"
+              src="/lovable-uploads/8c31e5aa-f857-4dad-8554-c50c27731863.png" 
+              alt="Hope for Life Ministry Logo" 
+              className="h-12 w-12 md:h-14 md:w-14 object-contain rounded-full shadow-lg"
             />
             
             {/* Mobile Menu Button */}
