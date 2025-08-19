@@ -2,49 +2,70 @@ import { Navigation } from "@/components/Navigation"
 import { Footer } from "@/components/Footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Mail, Phone, MapPin, Clock, Send, MessageCircle } from "lucide-react"
+import { Mail, Phone, MapPin, MessageCircle, Facebook, Youtube } from "lucide-react"
 import bibleBackground from "@/assets/bible-background.jpg"
 
 const Contact = () => {
   const contactInfo = [
     {
+      icon: MapPin,
+      title: "Address",
+      details: "Nairobi, Githurai 45, Mwihoko",
+      link: "https://maps.google.com/?q=Nairobi,+Githurai+45,+Mwihoko",
+      color: "neon-blue"
+    },
+    {
       icon: Phone,
       title: "Phone",
-      details: ["+254 727 891 035"],
-      description: "Call us during office hours"
+      details: "+254 727 691035",
+      link: "tel:+254727691035",
+      color: "neon-pink"
     },
     {
       icon: Mail,
       title: "Email",
-      details: ["diemsusmutuku@gmail.com"],
-      description: "Send us your questions anytime"
+      details: "dismusmutuku@gmail.com",
+      link: "mailto:dismusmutuku@gmail.com",
+      color: "neon-green"
     },
     {
-      icon: MapPin,
-      title: "Location",
-      details: ["Hope for Life Jesus Ministry", "International"],
-      description: "Visit our ministry centers"
+      icon: MessageCircle,
+      title: "WhatsApp",
+      details: "+254 727 691035",
+      link: "https://wa.me/254727691035",
+      color: "neon-cyan"
     },
     {
-      icon: Clock,
-      title: "Office Hours",
-      details: ["Monday - Friday: 9:00 AM - 5:00 PM", "Sunday: After Service"],
-      description: "When we're available to help"
+      icon: Facebook,
+      title: "Facebook",
+      details: "Follow us on Facebook",
+      link: "https://www.facebook.com/dismus.mwania.1",
+      color: "neon-blue"
+    },
+    {
+      icon: Youtube,
+      title: "YouTube",
+      details: "Watch our videos",
+      link: "https://www.youtube.com/@dismusmutuku1277",
+      color: "neon-pink"
     }
   ]
 
   return (
-    <div 
-      className="min-h-screen bg-background relative"
-      style={{
-        backgroundImage: `url(${bibleBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}
-    >
-      {/* Background overlay */}
-      <div className="absolute inset-0 bg-background/85 dark:bg-background/90" />
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Purple Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900" />
+      
+      {/* Faint Open Bible Background */}
+      <div 
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: `url(${bibleBackground})`,
+          backgroundSize: 'contain',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      />
       
       <div className="relative z-10">
         <Navigation />
@@ -52,143 +73,77 @@ const Contact = () => {
           {/* Hero Section */}
           <section className="py-16 px-4">
             <div className="container mx-auto max-w-6xl text-center">
-              <div className="flex items-center justify-center gap-3 mb-6">
-                <Mail className="w-8 h-8 text-primary" />
-                <h1 className="text-4xl md:text-5xl font-bold text-primary">Contact Us</h1>
-              </div>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Get in touch with Hope for Life Bible College. We're here to answer your questions and guide your spiritual journey.
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 glow-text">
+                Get In Touch
+              </h1>
+              <p className="text-xl text-white/80 max-w-3xl mx-auto">
+                We'd love to hear from you. Reach out for more information or a visit.
               </p>
-              <div className="neon-verse-container mt-8">
-                <p className="neon-verse">
-                  📖 "Ask, and it will be given to you; seek, and you will find; knock, and it will be opened to you." — Matthew 7:7
-                </p>
-              </div>
             </div>
           </section>
 
-          {/* Contact Information Grid */}
+          {/* Contact Information */}
           <section className="py-16 px-4">
             <div className="container mx-auto max-w-6xl">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                {contactInfo.map((info, index) => {
-                  const IconComponent = info.icon
-                  return (
-                    <Card key={index} className="glass-card hover-scale transition-all duration-300 shadow-lg">
-                      <CardContent className="p-6 text-center">
-                        <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                          <IconComponent className="w-6 h-6 text-white" />
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                {/* Left Side - Contact Info */}
+                <div className="space-y-6">
+                  {contactInfo.map((info, index) => {
+                    const IconComponent = info.icon
+                    return (
+                      <a
+                        key={index}
+                        href={info.link}
+                        target={info.link.startsWith('http') ? '_blank' : undefined}
+                        rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="flex items-center p-6 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 hover:bg-white/15 transition-all duration-300 group"
+                      >
+                        <div className={`w-16 h-16 rounded-full flex items-center justify-center mr-6 ${info.color} neon-icon group-hover:scale-110 transition-transform duration-300`}>
+                          <IconComponent className="w-8 h-8 text-white" />
                         </div>
-                        <h3 className="text-xl font-bold text-primary mb-2">{info.title}</h3>
-                        <p className="text-sm text-muted-foreground mb-3">{info.description}</p>
-                        <div className="space-y-1">
-                          {info.details.map((detail, detailIndex) => (
-                            <p key={detailIndex} className="text-foreground font-medium text-sm">
-                              {detail}
-                            </p>
-                          ))}
+                        <div>
+                          <h3 className="text-xl font-bold text-white mb-1">{info.title}</h3>
+                          <p className="text-white/80">{info.details}</p>
                         </div>
-                      </CardContent>
-                    </Card>
-                  )
-                })}
-              </div>
-            </div>
-          </section>
+                      </a>
+                    )
+                  })}
+                </div>
 
-          {/* QR Code and Quick Contact */}
-          <section className="py-16 px-4 bg-muted/20">
-            <div className="container mx-auto max-w-6xl">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* QR Code Card */}
-                <Card className="glass-card hover-scale transition-all duration-300 shadow-lg">
-                  <CardContent className="p-8 text-center">
-                    <div className="flex items-center justify-center gap-4 mb-6">
-                      <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
-                        <MessageCircle className="w-6 h-6 text-secondary-foreground" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-secondary">Quick Access</h2>
-                    </div>
-                    <p className="text-foreground mb-6">
-                      Scan the QR code to visit our website and access more resources
-                    </p>
-                    <div className="flex justify-center mb-4">
-                      <img 
-                        src="/lovable-uploads/fea897ea-762e-4aeb-9d5b-28e6ebd12ef9.png" 
-                        alt="QR Code to Hope for Life Ministry Website" 
-                        className="w-48 h-48 object-contain"
-                      />
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      https://diren8846.github.io/hope-for-life-ministries-international/
-                    </p>
-                  </CardContent>
-                </Card>
-
-                {/* Contact Form */}
-                <Card className="glass-card hover-scale transition-all duration-300 shadow-lg">
-                  <CardContent className="p-8">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center">
-                        <Send className="w-6 h-6 text-white" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-accent">Send Message</h2>
-                    </div>
-                    <div className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-2">Name</label>
-                        <input 
-                          type="text" 
-                          className="w-full px-4 py-2 border border-border rounded-lg bg-background/50 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                          placeholder="Your full name"
+                {/* Right Side - QR Code */}
+                <div className="flex items-center justify-center">
+                  <Card className="bg-white/10 backdrop-blur-md border border-white/20 hover-scale transition-all duration-300">
+                    <CardContent className="p-8 text-center">
+                      <h2 className="text-2xl font-bold text-white mb-6">Visit Our Website</h2>
+                      <p className="text-white/80 mb-6">
+                        Scan the QR code to visit our website and access more resources
+                      </p>
+                      <div className="flex justify-center mb-6">
+                        <img 
+                          src="/lovable-uploads/aeb18e35-e335-42a3-b40f-cd88577c1af2.png" 
+                          alt="QR Code to Hope for Life Ministry Website" 
+                          className="w-48 h-48 object-contain rounded-lg"
                         />
                       </div>
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-2">Email</label>
-                        <input 
-                          type="email" 
-                          className="w-full px-4 py-2 border border-border rounded-lg bg-background/50 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                          placeholder="your.email@example.com"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-2">Message</label>
-                        <textarea 
-                          rows={4} 
-                          className="w-full px-4 py-2 border border-border rounded-lg bg-background/50 text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-                          placeholder="How can we help you?"
-                        />
-                      </div>
-                      <Button className="w-full">
-                        <Send className="w-4 h-4 mr-2" />
-                        Send Message
+                      <Button 
+                        asChild
+                        className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-3"
+                      >
+                        <a 
+                          href="https://diron8846.github.io/hope-for-life-ministries-international/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                          Visit Our Website
+                        </a>
                       </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
           </section>
 
-          {/* Scripture Encouragement */}
-          <section className="py-16 px-4">
-            <div className="container mx-auto max-w-4xl">
-              <Card className="glass-card hover-scale transition-all duration-300 shadow-lg">
-                <CardContent className="p-8 text-center">
-                  <h2 className="text-3xl font-bold text-primary mb-6">We're Here for You</h2>
-                  <p className="text-foreground leading-relaxed mb-6 text-lg">
-                    Whether you have questions about our courses, need spiritual guidance, or want to learn more about our ministry, 
-                    we're here to support you on your journey of faith. Don't hesitate to reach out to us.
-                  </p>
-                  <div className="neon-verse-container">
-                    <p className="neon-verse">
-                      📖 "Cast all your anxieties on him, because he cares for you." — 1 Peter 5:7
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </section>
         </main>
         <Footer />
       </div>
