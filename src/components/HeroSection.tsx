@@ -1,5 +1,5 @@
 import { Button } from "./ui/button"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, Cross, Book, Heart, Crown } from "lucide-react"
 
 export function HeroSection() {
   const scrollToSection = (sectionId: string) => {
@@ -10,55 +10,52 @@ export function HeroSection() {
   }
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/80 to-accent light-effect">
-        <div className="absolute inset-0 bg-black/20"></div>
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden hero-3d-bg">
+      {/* Floating Christian Icons */}
+      <div className="absolute inset-0 pointer-events-none">
+        <Cross className="floating-icon w-16 h-16 text-white top-20 left-20" />
+        <Book className="floating-icon w-14 h-14 text-white top-32 right-32" />
+        <Heart className="floating-icon w-12 h-12 text-white bottom-40 left-32" />
+        <Crown className="floating-icon w-18 h-18 text-white bottom-20 right-20" />
+        <Cross className="floating-icon w-10 h-10 text-white top-60 left-1/2" />
+        <Book className="floating-icon w-12 h-12 text-white bottom-60 right-1/4" />
       </div>
-      
-      {/* Flowing gradient border */}
-      <div className="absolute inset-0">
-        <div className="gradient-flow absolute top-0 left-0 right-0 h-1"></div>
-        <div className="gradient-flow absolute bottom-0 left-0 right-0 h-1"></div>
-        <div className="gradient-flow absolute top-0 bottom-0 left-0 w-1"></div>
-        <div className="gradient-flow absolute top-0 bottom-0 right-0 w-1"></div>
+
+      {/* Parallax background effects */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-purple-500/10 to-transparent animate-pulse"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-blue-500/10 to-transparent animation-delay-1000 animate-pulse"></div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in">
-          Welcome to{" "}
-          <span className="text-secondary">Hope For Life</span>{" "}
-          <span className="text-accent">Ministry</span>
+      <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
+        <h1 className="hero-title-3d text-6xl md:text-8xl lg:text-9xl mb-8 animate-fade-in">
+          Hope For Life Ministry
         </h1>
         
-        <p className="text-xl md:text-2xl text-white/90 mb-8 font-light animate-fade-in">
-          Equipping disciples for the work of ministry and the second coming of Christ.
+        <p className="hero-subtitle-3d text-2xl md:text-3xl lg:text-4xl mb-12 font-semibold animate-fade-in">
+          Equipping disciples for the work of ministry and the second coming of Christ
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-          <Button 
-            size="lg" 
-            variant="secondary"
-            className="text-lg px-8 py-4 hover-scale"
+        <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in">
+          <button 
+            className="glass-btn-learn text-xl px-10 py-5 rounded-xl font-bold text-white"
             onClick={() => scrollToSection("about")}
           >
             Learn More
-          </Button>
-          <Button 
-            size="lg" 
-            variant="outline"
-            className="text-lg px-8 py-4 text-white border-white hover:bg-white hover:text-primary hover-scale"
+          </button>
+          <button 
+            className="glass-btn-join text-xl px-10 py-5 rounded-xl font-bold text-white"
             onClick={() => scrollToSection("contact")}
           >
             Join Us
-          </Button>
+          </button>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <ChevronDown className="w-8 h-8 text-white/70" />
+      {/* Animated Scroll Arrow */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <ChevronDown className="w-10 h-10 scroll-arrow" />
       </div>
     </section>
   )
