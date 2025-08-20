@@ -1,36 +1,39 @@
 import { Navigation } from "@/components/Navigation"
 import { Footer } from "@/components/Footer"
 import { Card, CardContent } from "@/components/ui/card"
-import { BookOpen, Download, Video, FileText, Headphones, Users } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { BookOpen, Download, FileText, MessageCircle, Send, Bot } from "lucide-react"
 import bibleBackground from "@/assets/bible-background.jpg"
+import { useState } from "react"
 
 const Resources = () => {
-  const resourceCategories = [
-    {
-      icon: BookOpen,
-      title: "Study Guides",
-      description: "Comprehensive Bible study materials and lesson plans",
-      items: ["Systematic Theology", "Biblical Hermeneutics", "Church History", "Apologetics"]
-    },
-    {
-      icon: Video,
-      title: "Video Lectures",
-      description: "In-depth teaching sessions from our experienced faculty",
-      items: ["Old Testament Survey", "New Testament Studies", "Pastoral Ministry", "Evangelism"]
-    },
-    {
-      icon: Headphones,
-      title: "Audio Sermons",
-      description: "Inspiring messages and teachings for spiritual growth",
-      items: ["Sunday Sermons", "Bible Exposition", "Devotional Messages", "Conference Talks"]
-    },
-    {
-      icon: FileText,
-      title: "Academic Papers",
-      description: "Scholarly articles and research papers on biblical topics",
-      items: ["Theological Research", "Biblical Archaeology", "Ministry Studies", "Church Planting"]
-    },
+  const [messages, setMessages] = useState([
+    { type: 'bot', content: 'Hello! I\'m your AI Bible Assistant. Ask me about the Bible, theology, or any spiritual questions you have.' }
+  ])
+  const [inputMessage, setInputMessage] = useState('')
+
+  const downloadableResources = [
+    { title: "Old Testament Notes", icon: BookOpen, type: "PDF" },
+    { title: "New Testament Commentary", icon: BookOpen, type: "PDF" },
+    { title: "Systematic Theology Guide", icon: FileText, type: "PDF" },
+    { title: "Biblical Hermeneutics", icon: FileText, type: "PDF" },
+    { title: "Church History Overview", icon: BookOpen, type: "PDF" },
+    { title: "Apologetics Handbook", icon: FileText, type: "PDF" },
+    { title: "Pastoral Ministry Guide", icon: BookOpen, type: "PDF" },
+    { title: "Biblical Archaeology", icon: FileText, type: "PDF" },
   ]
+
+  const handleSendMessage = () => {
+    if (inputMessage.trim()) {
+      setMessages([...messages, 
+        { type: 'user', content: inputMessage },
+        { type: 'bot', content: 'Thank you for your question! This is a demo AI assistant. In the full version, I would provide detailed Biblical insights and theological guidance.' }
+      ])
+      setInputMessage('')
+    }
+  }
 
   return (
     <div 
@@ -56,7 +59,7 @@ const Resources = () => {
                 <h1 className="text-4xl md:text-5xl font-bold text-primary">Resources & Study Materials</h1>
               </div>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Access our comprehensive library of biblical resources, study materials, and educational content
+                Access our comprehensive library of biblical resources and get help from our AI Bible Assistant
               </p>
               <div className="neon-verse-container mt-8">
                 <p className="neon-verse">
@@ -66,62 +69,105 @@ const Resources = () => {
             </div>
           </section>
 
-          {/* Resources Grid */}
+          {/* Two Column Layout */}
           <section className="py-16 px-4">
             <div className="container mx-auto max-w-6xl">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {resourceCategories.map((category, index) => {
-                  const IconComponent = category.icon
-                  return (
-                    <Card key={index} className="glass-card hover-scale transition-all duration-300 shadow-lg">
-                      <CardContent className="p-8">
-                        <div className="flex items-center gap-4 mb-6">
-                          <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                            <IconComponent className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <h3 className="text-2xl font-bold text-primary">{category.title}</h3>
-                            <p className="text-muted-foreground">{category.description}</p>
-                          </div>
-                        </div>
-                        <ul className="space-y-3">
-                          {category.items.map((item, itemIndex) => (
-                            <li key={itemIndex} className="flex items-center gap-3">
-                              <Download className="w-4 h-4 text-accent" />
-                              <span className="text-foreground">{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </CardContent>
-                    </Card>
-                  )
-                })}
-              </div>
-            </div>
-          </section>
-
-          {/* Community Resources */}
-          <section className="py-16 px-4 bg-muted/20">
-            <div className="container mx-auto max-w-6xl">
-              <Card className="glass-card hover-scale transition-all duration-300 shadow-lg">
-                <CardContent className="p-8 text-center">
-                  <div className="flex items-center justify-center gap-4 mb-6">
-                    <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center">
-                      <Users className="w-6 h-6 text-white" />
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                {/* Downloadable Resources Section */}
+                <Card className="glass-card hover-scale transition-all duration-300 shadow-lg">
+                  <CardContent className="p-8">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                        <Download className="w-6 h-6 text-white" />
+                      </div>
+                      <h2 className="text-3xl font-bold text-primary">📚 Downloadable Resources</h2>
                     </div>
-                    <h2 className="text-3xl font-bold text-accent">Community & Discussion</h2>
-                  </div>
-                  <p className="text-foreground leading-relaxed mb-6 text-lg max-w-3xl mx-auto">
-                    Join our online community for fellowship, discussion, and collaborative study. 
-                    Connect with fellow students and engage in meaningful conversations about faith and Scripture.
-                  </p>
-                  <div className="neon-verse-container">
-                    <p className="neon-verse">
-                      📖 "Iron sharpens iron, and one man sharpens another." — Proverbs 27:17
+                    <p className="text-muted-foreground mb-6">
+                      Access our collection of lecture notes, Bible study guides, and theology books
                     </p>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div className="space-y-4">
+                      {downloadableResources.map((resource, index) => {
+                        const IconComponent = resource.icon
+                        return (
+                          <div 
+                            key={index}
+                            className="flex items-center gap-4 p-4 rounded-lg bg-muted/10 hover:bg-muted/20 transition-colors cursor-pointer border border-border/50 hover:border-primary/30"
+                          >
+                            <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                              <IconComponent className="w-5 h-5 text-white" />
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="font-semibold text-foreground">{resource.title}</h3>
+                              <p className="text-sm text-muted-foreground">{resource.type}</p>
+                            </div>
+                            <Download className="w-4 h-4 text-primary" />
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* AI Bible Assistant Section */}
+                <Card className="glass-card hover-scale transition-all duration-300 shadow-lg">
+                  <CardContent className="p-8 h-full flex flex-col">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center">
+                        <Bot className="w-6 h-6 text-white" />
+                      </div>
+                      <h2 className="text-3xl font-bold text-accent">🤖 AI Bible Assistant</h2>
+                    </div>
+                    
+                    {/* Chat Messages Area */}
+                    <ScrollArea className="flex-1 h-80 mb-4 p-4 bg-muted/5 rounded-lg border border-border/30">
+                      <div className="space-y-4">
+                        {messages.map((message, index) => (
+                          <div
+                            key={index}
+                            className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                          >
+                            <div
+                              className={`max-w-[80%] p-3 rounded-lg ${
+                                message.type === 'user'
+                                  ? 'bg-primary text-primary-foreground'
+                                  : 'bg-muted text-foreground border border-border/50'
+                              }`}
+                            >
+                              {message.type === 'bot' && (
+                                <div className="flex items-center gap-2 mb-1">
+                                  <Bot className="w-4 h-4" />
+                                  <span className="text-sm font-medium">AI Assistant</span>
+                                </div>
+                              )}
+                              <p className="text-sm leading-relaxed">{message.content}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </ScrollArea>
+
+                    {/* Chat Input */}
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="Ask me about the Bible..."
+                        value={inputMessage}
+                        onChange={(e) => setInputMessage(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                        className="flex-1"
+                      />
+                      <Button 
+                        onClick={handleSendMessage}
+                        className="px-4"
+                        disabled={!inputMessage.trim()}
+                      >
+                        <Send className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+              </div>
             </div>
           </section>
         </main>
