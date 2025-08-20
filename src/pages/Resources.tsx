@@ -13,6 +13,70 @@ const Resources = () => {
     { type: 'bot', content: 'Hello! I\'m your AI Bible Assistant. Ask me about the Bible, theology, or any spiritual questions you have.' }
   ])
   const [inputMessage, setInputMessage] = useState('')
+  const [isTyping, setIsTyping] = useState(false)
+
+  // Bible knowledge base for intelligent responses
+  const getBibleResponse = (question: string): string => {
+    const lowerQuestion = question.toLowerCase()
+    
+    // God-related questions
+    if (lowerQuestion.includes('who is god') || lowerQuestion.includes('what is god')) {
+      return 'God is the eternal, all-powerful Creator of the universe. The Bible teaches that God exists in three persons - Father, Son (Jesus Christ), and Holy Spirit - known as the Trinity. "In the beginning God created the heavens and the earth" (Genesis 1:1). God is love (1 John 4:8), holy, just, and merciful.'
+    }
+    
+    // Jesus-related questions
+    if (lowerQuestion.includes('jesus') || lowerQuestion.includes('christ')) {
+      return 'Jesus Christ is the Son of God who became human to save humanity from sin. He lived a perfect life, died on the cross for our sins, and rose again on the third day. "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life" (John 3:16).'
+    }
+    
+    // Salvation questions
+    if (lowerQuestion.includes('salvation') || lowerQuestion.includes('saved') || lowerQuestion.includes('eternal life')) {
+      return 'Salvation is God\'s gift of eternal life through faith in Jesus Christ. "For it is by grace you have been saved, through faith—and this is not from yourselves, it is the gift of God" (Ephesians 2:8). We are saved not by our works, but by believing in Jesus Christ as our Lord and Savior.'
+    }
+    
+    // Prayer questions
+    if (lowerQuestion.includes('prayer') || lowerQuestion.includes('pray')) {
+      return 'Prayer is our communication with God. Jesus taught us to pray in Matthew 6:9-13 (The Lord\'s Prayer). We can pray anywhere, anytime, about anything. "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God" (Philippians 4:6).'
+    }
+    
+    // Bible questions
+    if (lowerQuestion.includes('bible') || lowerQuestion.includes('scripture')) {
+      return 'The Bible is God\'s Word, containing 66 books written by various authors inspired by the Holy Spirit. "All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness" (2 Timothy 3:16). It reveals God\'s character, His plan for humanity, and how we can have a relationship with Him.'
+    }
+    
+    // Love questions
+    if (lowerQuestion.includes('love')) {
+      return 'God\'s love is unconditional and sacrificial. "But God demonstrates his own love for us in this: While we were still sinners, Christ died for us" (Romans 5:8). We are called to love God and love others as Jesus commanded in Matthew 22:37-39.'
+    }
+    
+    // Purpose/meaning questions
+    if (lowerQuestion.includes('purpose') || lowerQuestion.includes('meaning') || lowerQuestion.includes('why')) {
+      return 'Our purpose is to glorify God and enjoy Him forever. "For we are God\'s handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do" (Ephesians 2:10). We find meaning in our relationship with God and serving others in love.'
+    }
+    
+    // Sin questions
+    if (lowerQuestion.includes('sin')) {
+      return 'Sin is falling short of God\'s perfect standard. "For all have sinned and fall short of the glory of God" (Romans 3:23). Sin separates us from God, but through Jesus Christ, we can be forgiven and reconciled to God.'
+    }
+    
+    // Heaven questions
+    if (lowerQuestion.includes('heaven')) {
+      return 'Heaven is our eternal home with God for those who believe in Jesus Christ. "In my Father\'s house are many rooms... I am going there to prepare a place for you" (John 14:2). It\'s a place of perfect peace, joy, and fellowship with God forever.'
+    }
+    
+    // Faith questions
+    if (lowerQuestion.includes('faith')) {
+      return 'Faith is trusting in God and His promises. "Now faith is confidence in what we hope for and assurance about what we do not see" (Hebrews 11:1). Faith is essential for our relationship with God and is strengthened through reading His Word and prayer.'
+    }
+    
+    // General greetings
+    if (lowerQuestion.includes('hello') || lowerQuestion.includes('hi') || lowerQuestion.includes('hey')) {
+      return 'Hello! I\'m here to help you explore God\'s Word and answer your spiritual questions. What would you like to know about the Bible or faith today?'
+    }
+    
+    // Default response for unrecognized questions
+    return `That's a thoughtful question! While I can provide guidance on many Biblical topics, I encourage you to also study God's Word directly and seek counsel from mature believers. "Study to show yourself approved to God, a workman who does not need to be ashamed, rightly dividing the word of truth" (2 Timothy 2:15). Is there a specific Bible verse or topic you'd like to explore further?`
+  }
 
   const downloadableResources = [
     { title: "Old Testament Notes", icon: BookOpen, type: "PDF" },
@@ -25,13 +89,19 @@ const Resources = () => {
     { title: "Biblical Archaeology", icon: FileText, type: "PDF" },
   ]
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputMessage.trim()) {
-      setMessages([...messages, 
-        { type: 'user', content: inputMessage },
-        { type: 'bot', content: 'Thank you for your question! This is a demo AI assistant. In the full version, I would provide detailed Biblical insights and theological guidance.' }
-      ])
+      const userMessage = inputMessage.trim()
+      setMessages(prev => [...prev, { type: 'user', content: userMessage }])
       setInputMessage('')
+      setIsTyping(true)
+      
+      // Simulate typing delay for more realistic feel
+      setTimeout(() => {
+        const response = getBibleResponse(userMessage)
+        setMessages(prev => [...prev, { type: 'bot', content: response }])
+        setIsTyping(false)
+      }, 1000 + Math.random() * 1000) // Random delay between 1-2 seconds
     }
   }
 
@@ -144,6 +214,26 @@ const Resources = () => {
                             </div>
                           </div>
                         ))}
+                        
+                        {/* Typing Indicator */}
+                        {isTyping && (
+                          <div className="flex justify-start">
+                            <div className="bg-muted text-foreground border border-border/50 p-3 rounded-lg">
+                              <div className="flex items-center gap-2 mb-1">
+                                <Bot className="w-4 h-4" />
+                                <span className="text-sm font-medium">AI Assistant</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <div className="flex space-x-1">
+                                  <div className="w-2 h-2 bg-current rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                                  <div className="w-2 h-2 bg-current rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                                  <div className="w-2 h-2 bg-current rounded-full animate-bounce"></div>
+                                </div>
+                                <span className="text-xs text-muted-foreground ml-2">typing...</span>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </ScrollArea>
 
