@@ -1,35 +1,34 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Users, Heart, BookOpen, Phone } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 export function QuickLinksSection() {
+  const navigate = useNavigate()
+  
   const quickLinks = [
     {
-      title: "Teachers Profile",
+      title: "Our Teachers",
       description: "Meet our dedicated faculty and their areas of expertise",
       icon: Users,
-      href: "#teachers",
-      color: "primary"
+      href: "/teachers"
     },
     {
       title: "About & Mission",
       description: "Discover our vision, mission, and core values",
       icon: Heart,
-      href: "#about",
-      color: "accent"
+      href: "/about"
     },
     {
       title: "Resources & Study Materials",
       description: "Access Bible studies, courses, and learning materials",
       icon: BookOpen,
-      href: "#resources",
-      color: "secondary"
+      href: "/resources"
     },
     {
-      title: "Contact & Support",
+      title: "Contact Us",
       description: "Get in touch with us for guidance and support",
       icon: Phone,
-      href: "#contact",
-      color: "primary"
+      href: "/contact"
     }
   ]
 
@@ -44,15 +43,12 @@ export function QuickLinksSection() {
             return (
               <Card 
                 key={index}
-                className="glass-card hover-scale transition-all duration-300 cursor-pointer group shadow-lg hover:shadow-2xl"
-                onClick={() => {
-                  const element = document.getElementById(link.href.substring(1))
-                  if (element) element.scrollIntoView({ behavior: "smooth" })
-                }}
+                className="quick-link-card bg-card hover:bg-card/80 border border-border hover:border-primary/50 transition-all duration-300 cursor-pointer group hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/20 dark:hover:shadow-primary/30"
+                onClick={() => navigate(link.href)}
               >
                 <CardHeader className="text-center pb-4">
-                  <div className={`w-16 h-16 mx-auto rounded-full bg-${link.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                    <Icon className="w-8 h-8 text-white" />
+                  <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform group-hover:bg-primary/20 dark:group-hover:bg-primary/30">
+                    <Icon className="w-8 h-8 text-primary" />
                   </div>
                   <CardTitle className="text-lg text-foreground group-hover:text-primary transition-colors">
                     {link.title}
